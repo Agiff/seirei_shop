@@ -7,6 +7,8 @@ import useStyles from './styles';
 const Product = ({ product }) => {
   const classes = useStyles();
 
+  console.log(product);
+
   return (
     <Card className={classes.root}>
       <CardMedia className={classes.media} image={product.image.url} title={product.name} />
@@ -16,7 +18,7 @@ const Product = ({ product }) => {
             {product.name}
           </Typography>
           <Typography variant="body1">
-            {product.price.formatted_with_symbol}
+            {product.price.formatted_with_symbol.slice(0, -3).replace("Rp", "Rp ")}
           </Typography>
         </div>
         <Typography dangerouslySetInnerHTML={{ __html: product.description }} variant="body2" color="textSecondary" />
