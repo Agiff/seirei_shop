@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { commerce } from './lib/commerce';
-
 import { Products, Navbar, Cart } from './components';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -21,6 +21,18 @@ const App = () => {
     setCart(await commerce.cart.add(productId, quantity));
   }
 
+  const handleUpdateCartQuantity = async (productId, quantity) => {
+    setCart(await commerce.cart.update(productId, { quantity }));
+  }
+
+  const handleRemoveFromCart = async (productId) => {
+    setCart(await commerce.cart.remove(productId));
+  }
+
+  const handleEmptyCart = async () => {
+    setCart(await commerce.cart.empty());
+  }
+
   // console.log(cart);
 
   useEffect(() => {
@@ -29,11 +41,22 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      <Navbar totalItems={cart.total_items} />
-      {/* <Products products={products} onAddToCart={handleAddToCart}/> */}
-      <Cart cart={cart} />
-    </div>
+    <Router>
+      <div>
+        <Navbar totalItems={cart.total_items} />
+        <Routes>
+            <Route path="/" element={<Products products = {products} onAddToCart = {handleAddToCart}/>} />
+            <Route path="/cart" element={
+              <Cart 
+                cart={cart} 
+                handleUpdateCartQuantity={handleUpdateCartQuantity}
+                handleRemoveFromCart={handleRemoveFromCart}
+                handleEmptyCart={handleEmptyCart}
+              />
+            }/>
+        </Routes>
+      </div>
+    </Router>
   )
 }
 
