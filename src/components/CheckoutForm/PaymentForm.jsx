@@ -1,10 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-const PaymentForm = () => {
+import Review from './Review.jsx';
+
+const PaymentForm = ({ checkoutToken }) => {
   return (
-    <div>
-      PaymentForm
-    </div>
+    <>
+      <Review checkoutToken={checkoutToken}/>
+    </>
   )
 }
 
