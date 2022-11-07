@@ -24,7 +24,7 @@ import CustomTextField from './CustomTextField';
     const { countries } = await commerce.services.localeListShippingCountries(checkoutTokenId);
 
     setShippingCountries(countries);
-    setShippingCountry(Object.keys(countries)[0]);
+    setShippingCountry(Object.keys(countries)[4]);
   }
 
   const fetchSubdivions = async (countryCode) => {

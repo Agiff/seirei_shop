@@ -11,8 +11,14 @@ const CustomTextField = ({ name, label }) => {
         control={control}
         name={name}
         defaultValue=""
-        render={({ field }) => (
-          <TextField fullWidth label={label} />
+        render={({ field: {onChange, value} }) => (
+          <TextField 
+            required 
+            fullWidth 
+            label={label} 
+            onChange={onChange} 
+            value={value}
+          />
         )}
       />
     </Grid>
